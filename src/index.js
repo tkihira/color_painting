@@ -1,13 +1,13 @@
+let recaptchaResult = null;
+
 const generate = async (text) => {
     document.getElementById("container").style.display = "none";
     document.getElementById("loading-indicator").style.display = "flex";
 
-    console.log('fetch start with: ' + text)
     const response = await fetch('./api/generate', {
         method: "POST",
-        body: JSON.stringify({ text })
+        body: JSON.stringify({ text, recaptchaResult })
     });
-    console.log('fetch finished')
     if (!response.ok) {
         const errorMessage = (await response.json()).error;
         console.log({ status: response.status, message: errorMessage });
@@ -41,9 +41,8 @@ const show = (url) => {
     };
 };
 
-const onSubmit = async (e) => {
+const onSubmit = (e) => {
     e.preventDefault();
-    // TODO: support captcha
     const text = document.getElementById("text").value.trim();
     if (!text) {
         document.getElementById("error").textContent = "入力が空です";
@@ -53,11 +52,21 @@ const onSubmit = async (e) => {
         document.getElementById("error").textContent = "英語のみ入力してください";
         return;
     }
+    if (!recaptchaResult) {
+        document.getElementById("error").textContent = "reCAPTCHA が完了していません";
+        return;
+    }
     document.getElementById("error").textContent = "";
 
-    await generate(text);
+    generate(text);
 };
 
 onload = async () => {
     document.getElementById("form").onsubmit = onSubmit;
+};
+onloadCallback = () => {
+    grecaptcha.render('recaptcha-container', {
+        'sitekey': "6LfyDeYpAAAAANt5sUHrJx_D6kAX4JVsY_QKt-Iu",
+        'callback': (result) => {recaptchaResult = result}
+    });
 };

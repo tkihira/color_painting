@@ -1,6 +1,7 @@
 const engineId = 'stable-diffusion-v1-6';
 const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
 const apiKey = process.env.STABILITY_API_KEY;
+const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
 const generate = async (text) => {
     const response = await fetch(
@@ -41,10 +42,31 @@ const generate = async (text) => {
 export default async (req, res) => {
     if (req.method === 'POST') {
         try {
-            const text = JSON.parse(req.body).text?.trim();
+            const params = JSON.parse(req.body);
+            const text = params.text?.trim();
+            const recaptchaResult = params.recaptchaResult;
+
+            // confirm recaptcha
+            const body = new URLSearchParams();
+            body.append('secret', recaptchaSecretKey);
+            body.append('response', recaptchaResult);
+
+            const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: body
+            });
+            const result = await response.json();
+            if (!result.success) {
+                res.status(403).json({ error: "invalid recaptcha: " + result['error-codes'].join() });
+                return;
+            }
+
             if (text) {
                 try {
-                    console.log("(generator) invoked with: "+ text);
+                    console.log("(generator) invoked with: " + text);
                     const buffer = await generate(text);
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'image/png');

@@ -3,7 +3,6 @@
 
 <head>
     <title>塗り絵 ジェネレーター</title>
-    <script src="main.js"></script>
     <style>
         body {
             display: flex;
@@ -25,7 +24,7 @@
 
         .input-field {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 20px;
@@ -36,6 +35,7 @@
             color: white;
             border: none;
             padding: 10px 20px;
+            margin-bottom: 10px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
@@ -102,20 +102,36 @@
             justify-content: space-evenly;
         }
 
+        .recaptcha-container {
+            display: flex;
+            justify-content: center;
+        }
+
         @media print {
             .button-container {
                 display: none;
             }
         }
     </style>
+    <script src="main.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+    </script>
 </head>
 
 <body>
     <div id="container" class="container">
         <h2>塗り絵 自動生成</h2>
         <form id="form">
-            題材: <input id="text" type="text" class="input-field" placeholder="英語で入力（例: trees with river）">
+            題材: <input id="text" type="text" class="input-field" placeholder="英語で入力"><br>
+            例:<br>
+            <ul style="text-align: left">
+                <li><a href="#" onclick="document.getElementById('text').value = this.textContent;return false">a house and trees with a river</a></li>
+                <li><a href="#" onclick="document.getElementById('text').value = this.textContent;return false">dinosaur with a volcano in the background</a></li>
+                <li><a href="#" onclick="document.getElementById('text').value = this.textContent;return false">lovely Japanese twin girls</a></li>
+                <li><a href="#" onclick="document.getElementById('text').value = this.textContent;return false">buildings in a city from sky</a></li>
+            </ul>
             <input type="submit" id="submit" class="submit-button" value="生成する"></input><br>
+            <div class="recaptcha-container" id="recaptcha-container"></div>
             <span id="error" class="error"></span>
         </form>
     </div>
