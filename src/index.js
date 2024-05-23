@@ -1,5 +1,6 @@
 const generate = async (text) => {
-    // TODO: change view
+    document.getElementById("container").style.display = "none";
+    document.getElementById("loading-indicator").style.display = "flex";
 
     console.log('fetch start with: ' + text)
     const response = await fetch('./api/generate', {
@@ -8,18 +9,37 @@ const generate = async (text) => {
     });
     console.log('fetch finished')
     if (!response.ok) {
-        console.log({ status: response.status, message: await response.text() });
-        // TODO: error check
+        const errorMessage = (await response.json()).error;
+        console.log({ status: response.status, message: errorMessage });
+        document.getElementsByClassName("spinner")[0].style.display = "none";
+        document.getElementById("loading-indicator").getElementsByTagName("p")[0].textContent = errorMessage;
+        return;
     } else {
+        document.getElementById("loading-indicator").style.display = "none";
+
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
+        show(url);
 
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Fetched PNG Image';
-        document.body.appendChild(img);
     }
-}
+};
+
+const show = (url) => {
+    document.getElementById("result").style.display = "block";
+
+    const img = document.createElement('img');
+    img.src = url;
+    img.width = 700;
+    img.height = 700;
+    document.getElementById("image-container").appendChild(img);
+
+    document.getElementById("reload").onclick = () => {
+        location.reload();
+    };
+    document.getElementById("print").onclick = () => {
+        window.print();
+    };
+};
 
 const onSubmit = async (e) => {
     e.preventDefault();
