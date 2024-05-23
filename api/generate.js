@@ -5,29 +5,18 @@ const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
 const generate = async (text) => {
     // call SAI's API to generate an image from text
-    const response = await fetch(
-        `${apiHost}/v1/generation/${engineId}/text-to-image`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-                text_prompts: [
-                    {
-                        text: text + ', white and black, coloring book for kids, simple, adult coloring book, no detail, outline no color, fill frame, edge to edge, clipart white background',
-                    },
-                ],
-                cfg_scale: 7,
-                height: 1024,
-                width: 1024,
-                steps: 30,
-                samples: 1,
-            }),
-        }
-    );
+    const response = await fetch(`${apiHost}/v1/generation/${engineId}/text-to-image`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+            text_prompts: [{ text: text + ', white and black, coloring book for kids, simple, adult coloring book, no detail, outline no color, fill frame, edge to edge, clipart white background' }],
+            cfg_scale: 7, height: 1024, width: 1024, steps: 30, samples: 1,
+        }),
+    });
 
     if (!response.ok) {
         const json = await response.json();
