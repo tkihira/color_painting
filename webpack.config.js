@@ -13,22 +13,6 @@ const main = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'build'),
     },
-    module: {
-        rules: [
-            {
-                test: /\.png$/i,
-                loader: 'url-loader',
-            },
-            {
-                test: /\.webp$/i,
-                loader: 'url-loader',
-            },
-            {
-                test: /\.svg$/i,
-                loader: 'url-loader',
-            },
-        ],
-    },
     plugins: [
         new CopyWebpackPlugin({
             patterns: [

@@ -58,7 +58,7 @@ export default async (req, res) => {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: body
+                    body
                 });
                 const result = await response.json();
                 if (!result.success) {
