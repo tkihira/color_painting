@@ -45,14 +45,23 @@
         .submit-button:hover {
             background-color: #0056b3;
         }
+
+        .error {
+            color: #ff6666;
+            font-size: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <h2>塗り絵 自動生成</h2>
-        題材: <input type="text" class="input-field" placeholder="英語で入力（例: trees with river）">
-        <button class="submit-button">生成する</button>
+        <form id="form">
+            題材: <input id="text" type="text" class="input-field" placeholder="英語で入力（例: trees with river）">
+            <input type="submit" id="submit" class="submit-button" value="生成する"></input><br>
+            <span id="error" class="error"></span>
+        </form>
     </div>
 </body>
 

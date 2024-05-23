@@ -3,6 +3,7 @@ const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
 const apiKey = process.env.STABILITY_API_KEY;
 
 const generate = async (text) => {
+    console.log("server side fetch starts with: " + text);
     const response = await fetch(
         `${apiHost}/v1/generation/${engineId}/text-to-image`,
         {
@@ -26,6 +27,7 @@ const generate = async (text) => {
             }),
         }
     );
+    console.log("server side fetch finished");
 
     if (!response.ok) {
         const json = await response.json();
@@ -40,8 +42,10 @@ const generate = async (text) => {
 
 export default async (req, res) => {
     if (req.method === 'POST') {
+        console.log("generate invoked.")
         try {
             const text = JSON.parse(req.body).text?.trim();
+            console.log("with: "+ text);
             if (text) {
                 try {
                     const buffer = await generate(text);
@@ -57,6 +61,8 @@ export default async (req, res) => {
                     }
                 }
                 // res.status(200).json({ echoedText: text });
+            } else {
+                res.status(400).json({ error: 'Empty input' });
             }
         } catch (e) {
             console.error(e);
