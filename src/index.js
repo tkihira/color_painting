@@ -29,8 +29,8 @@ const show = (url) => {
 
     const img = document.createElement('img');
     img.src = url;
-    img.width = 700;
-    img.height = 700;
+    img.width = 680;
+    img.height = 680;
     document.getElementById("image-container").appendChild(img);
 
     document.getElementById("reload").onclick = () => {

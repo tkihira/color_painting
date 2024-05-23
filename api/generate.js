@@ -47,21 +47,23 @@ export default async (req, res) => {
             const recaptchaResult = params.recaptchaResult;
 
             // confirm recaptcha
-            const body = new URLSearchParams();
-            body.append('secret', recaptchaSecretKey);
-            body.append('response', recaptchaResult);
+            {
+                const body = new URLSearchParams();
+                body.append('secret', recaptchaSecretKey);
+                body.append('response', recaptchaResult);
 
-            const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: body
-            });
-            const result = await response.json();
-            if (!result.success) {
-                res.status(403).json({ error: "invalid recaptcha: " + result['error-codes'].join() });
-                return;
+                const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: body
+                });
+                const result = await response.json();
+                if (!result.success) {
+                    res.status(403).json({ error: "invalid recaptcha: " + result['error-codes'].join() });
+                    return;
+                }
             }
 
             if (text) {
