@@ -8,7 +8,11 @@ Stability AI Platform のサンプルとして作りました
 
 ### 外部サービス準備
 
-Vercel を前提にしています。まず Vercel でアカウントを作ってください
+Stability AI Platform を利用します。アカウントを作ってください
+
+https://platform.stability.ai/account/overview
+
+Vercel を前提にしています。Vercel でもアカウントを作ってください
 
 https://vercel.com/
 
