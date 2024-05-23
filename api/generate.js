@@ -4,6 +4,7 @@ const apiKey = process.env.STABILITY_API_KEY;
 const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
 const generate = async (text) => {
+    // call SAI's API to generate an image from text
     const response = await fetch(
         `${apiHost}/v1/generation/${engineId}/text-to-image`,
         {
