@@ -71,6 +71,12 @@ Production 用のデプロイはこちら
 $ npx vercel --prod
 ```
 
-### ライセンス
+## ファイル構成
+
+- `src/index.js`: クライアント側コード
+- `api/generate.js`: Serverless Function
+- `misc/text2image.mjs`: Node.js 画像生成サンプルコード（ローカル実験用）
+
+## ライセンス
 
 MIT
