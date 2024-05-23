@@ -28,7 +28,8 @@ const generate = async (text) => {
     );
 
     if (!response.ok) {
-        throw `${response.status} response: ${await response.text()}`;
+        const json = await response.json();
+        throw `${json.name}: ${json.message}`;
     }
 
     const responseJSON = await response.json();
@@ -49,7 +50,7 @@ export default async (req, res) => {
                     res.end(buffer);
                 } catch (e) {
                     if (typeof e === "string") {
-                        res.status(500).json({ error: e });
+                        res.status(403).json({ error: e });
                     } else {
                         console.error(e);
                         res.status(500).json({ error: 'Internal Error' });

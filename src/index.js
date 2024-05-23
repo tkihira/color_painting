@@ -9,7 +9,7 @@ onload = async () => {
     } else {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
-        
+
         const img = document.createElement('img');
         img.src = url;
         img.alt = 'Fetched PNG Image';
