@@ -1,0 +1,23 @@
+{
+  "name": "color-painting",
+  "version": "1.0.0",
+  "description": "## How to use",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx webpack watch & npx vercel dev",
+    "build": "npx webpack",
+    "clean": "cd ./build/ && rm *",
+    "deploy": "npx vercel --prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "url-loader": "^4.1.1",
+    "vercel": "^34.2.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
