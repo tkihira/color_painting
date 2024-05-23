@@ -82,7 +82,6 @@ export default async (req, res) => {
                         res.status(500).json({ error: 'Internal Error' });
                     }
                 }
-                // res.status(200).json({ echoedText: text });
             } else {
                 res.status(400).json({ error: 'Empty input' });
             }
