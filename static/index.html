@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TITLE</title>
-        <script src="main.js"></script>
-    </head>
-    <body>
-        <h1>It works.</h1>
-        <hr>
-        <a href="./api/text">./api/text</a><br>
-        <a href="./api/image">./api/image</a><br>
-    </body>
+
+<head>
+    <title>塗り絵 ジェネレーター</title>
+    <script src="main.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .input-field {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>塗り絵 自動生成</h2>
+        題材: <input type="text" class="input-field" placeholder="英語で入力（例: trees with river）">
+        <button class="submit-button">生成する</button>
+    </div>
+</body>
+
 </html>
