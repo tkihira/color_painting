@@ -6,11 +6,21 @@ Stability AI Platform のサンプルとして作りました
 
 ## ビルド方法
 
+### 外部サービス準備
+
 Vercel を前提にしています。まず Vercel でアカウントを作ってください
 
 https://vercel.com/
 
-### 環境設定
+いたずら防止に reCAPTCHA v2 を導入しています。以下のページで新しいサイトを登録してください
+
+https://www.google.com/recaptcha/admin
+
+- `ラベル` は認識しやすい名前をつけてください
+- `reCAPTCHA タイプ` は チャレンジ（v2） を選び、「私はロボットではありません」チェックボックスを選びます
+- `ドメイン` には `localhost` と `vercel.app` を登録します
+
+### 環境構築
 
 ターミナルで
 
@@ -26,9 +36,9 @@ $ npx vercel
     - Output Directory の Override をオンにして、 `./build/` を設定
 - Environment Variables > Create new
     - Environments を全部チェックする（デフォルトでそうなっている）
-    - `STABILITY_API_KEY` に　https://platform.stability.ai/account/keys で作成した KEY を保存
-    - `RECAPTCHA_SECRET_KEY` に https://www.google.com/recaptcha/admin で作成した Secret Key を保存
-        - ドメインは `localhost` と `vercel.app` を登録します
+    - Key: `STABILITY_API_KEY` で　https://platform.stability.ai/account/keys で作成した KEY を保存
+    - Key: `RECAPTCHA_PUBLIC_KEY` で https://www.google.com/recaptcha/admin で作成した Site Key を保存
+    - Key: `RECAPTCHA_SECRET_KEY` で https://www.google.com/recaptcha/admin で作成した Secret Key を保存
 
 再度ターミナルで、
 
@@ -37,9 +47,9 @@ $ npx vercel pull
 $ npx vercel env pull
 ```
 
-を実行して、設定をサーバと同期する。以上で環境の準備は終了
+を実行して、設定をサーバと同期する。以上で環境構築は終了です
 
-### デバッグ
+### ローカル開発環境
 
 ```
 $ npm run watch

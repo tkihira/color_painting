@@ -74,7 +74,7 @@ onload = async () => {
 onloadCallback = () => {
     // called from recaptcha v2 JavaScript
     grecaptcha.render('recaptcha-container', {
-        'sitekey': "6LfyDeYpAAAAANt5sUHrJx_D6kAX4JVsY_QKt-Iu",
+        'sitekey': process.env.RECAPTCHA_PUBLIC_KEY,
         'callback': (result) => {recaptchaResult = result}
     });
 };

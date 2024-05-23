@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const path = require('path');
@@ -33,7 +34,10 @@ const main = {
             patterns: [
                 { from: 'static' }
             ]
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env.RECAPTCHA_PUBLIC_KEY': JSON.stringify(process.env.RECAPTCHA_PUBLIC_KEY),
+        }),
     ]
 };
 
