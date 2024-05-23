@@ -8,29 +8,20 @@ if (!apiKey) {
     throw new Error('Missing Stability API key.');
 }
 
-const response = await fetch(
-    `${apiHost}/v1/generation/${engineId}/text-to-image`,
-    {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-            text_prompts: [
-                {
-                    text: 'some buildings in a city from sky, white and black, coloring book for kids, simple, adult coloring book, no detail, outline no color, fill frame, edge to edge, clipart white background',
-                },
-            ],
-            cfg_scale: 7,
-            height: 1024,
-            width: 1024,
-            steps: 30,
-            samples: 1,
-        }),
-    }
-);
+const response = await fetch(`${apiHost}/v1/generation/${engineId}/text-to-image`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+        text_prompts: [
+            { text: 'an electric sheep, electric, sheep, blue and yellow, night city, illustration', },
+        ],
+        cfg_scale: 7, height: 1024, width: 1024, steps: 30, samples: 1,
+    }),
+});
 
 if (!response.ok) {
     throw new Error(`${response.status} response: ${await response.text()}`);
@@ -43,8 +34,5 @@ if (!fs.existsSync('./out')) {
 }
 
 responseJSON.artifacts.forEach((image, index) => {
-    fs.writeFileSync(
-        `./out/v1_txt2img_${index}.png`,
-        Buffer.from(image.base64, 'base64')
-    );
+    fs.writeFileSync(`./out/v1_txt2img_${index}.png`, Buffer.from(image.base64, 'base64'));
 });
