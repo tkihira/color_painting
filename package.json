@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "npx webpack watch & npx vercel dev",
     "build": "npx webpack",
-    "clean": "cd ./build/ && rm *",
+    "clean": "cd ./public/ && rm *",
     "deploy": "npx vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

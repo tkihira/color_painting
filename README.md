@@ -36,8 +36,6 @@ $ npx vercel
 
 ブラウザで [Vercel](https://vercel.com/) のプロジェクトページを開き、Project Settings 画面にて、
 
-- General > Build & Development Settings
-    - Output Directory の Override をオンにして、 `./build/` を設定
 - Environment Variables > Create new
     - Environments を全部チェックする（デフォルトでそうなっている）
     - Key: `STABILITY_API_KEY` で　https://platform.stability.ai/account/keys で作成した KEY を保存
