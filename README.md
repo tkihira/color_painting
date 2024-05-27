@@ -4,6 +4,8 @@ Stability AI Platform のサンプルとして作りました
 
 ライブデモ: https://color-painting.vercel.app/
 
+ソースコードの解説: http://nmi.jp/2024-05-27-Color-Painting-app-with-Stable-Diffusion-API
+
 ## ビルド方法
 
 ### 外部サービス準備
